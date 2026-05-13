@@ -1,0 +1,1 @@
+"""VK vote bot package."""

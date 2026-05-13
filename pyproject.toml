@@ -1,0 +1,15 @@
+[project]
+name = "vk-vote-bot"
+version = "0.1.0"
+description = "VK bot for contest voting built with vkbottle"
+requires-python = ">=3.11"
+dependencies = [
+    "vkbottle>=4.8.2,<5.0.0",
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

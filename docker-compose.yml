@@ -1,0 +1,11 @@
+services:
+  vk-vote-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: vk-vote-bot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./bot/data:/app/bot/data
