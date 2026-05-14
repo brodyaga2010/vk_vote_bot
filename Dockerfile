@@ -11,6 +11,7 @@ COPY run_bot.sh ./run_bot.sh
 
 RUN python -m pip install --upgrade pip && \
     python -m pip install . && \
+    sed -i 's/\r$//' /app/run_bot.sh && \
     chmod +x /app/run_bot.sh
 
 CMD ["/app/run_bot.sh"]

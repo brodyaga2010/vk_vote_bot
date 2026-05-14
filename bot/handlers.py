@@ -223,9 +223,11 @@ def create_bot(token: str) -> Bot:
         if user_id not in admin_ids:
             await message.answer(ADMIN_ONLY_TEXT, keyboard=build_menu_keyboard(False))
             return
-        text = format_results_message(registry, PARTICIPANTS)
-        if text == NO_RESULTS_TEXT:
-            text = f"Результаты голосования:\n{ADMIN_RESULTS_TITLE}\n\nГолосов пока нет."
+        body = format_results_message(registry, PARTICIPANTS)
+        if body == NO_RESULTS_TEXT:
+            text = f"{ADMIN_RESULTS_TITLE}\n\nГолосов пока нет."
+        else:
+            text = f"{ADMIN_RESULTS_TITLE}\n\n{body}"
         await message.answer(text, keyboard=build_menu_keyboard(True))
 
     @bot.on.private_message(text=[STOP_BUTTON_TEXT, "stop", "Stop", "/stop"])
@@ -235,9 +237,11 @@ def create_bot(token: str) -> Bot:
         if user_id not in admin_ids:
             await message.answer(ADMIN_ONLY_TEXT, keyboard=build_menu_keyboard(False))
             return
-        results_text = format_results_message(registry, PARTICIPANTS)
-        if results_text == NO_RESULTS_TEXT:
-            results_text = f"Результаты голосования:\n{ADMIN_RESULTS_TITLE}\n\nГолосов пока нет."
+        body = format_results_message(registry, PARTICIPANTS)
+        if body == NO_RESULTS_TEXT:
+            results_text = f"{ADMIN_RESULTS_TITLE}\n\nГолосов пока нет."
+        else:
+            results_text = f"{ADMIN_RESULTS_TITLE}\n\n{body}"
         await message.answer(results_text, keyboard=build_menu_keyboard(True))
         STOP_FLAG_PATH.parent.mkdir(parents=True, exist_ok=True)
         STOP_FLAG_PATH.write_text("stopped_by_admin\n", encoding="utf-8")

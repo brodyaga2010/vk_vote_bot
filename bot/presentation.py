@@ -35,10 +35,7 @@ def format_results_message(registry: VoteRegistry, participants: tuple[str, ...]
     total_votes = registry.get_total_votes()
     unknown_votes = total_votes - sum(votes_count for _, votes_count, _ in results)
     leader_votes = max(votes_count for _, votes_count, _ in results)
-    lines = [
-        "Результаты голосования:",
-        "",
-    ]
+    lines: list[str] = []
     for index, (participant, votes_count, is_leader) in enumerate(results, start=1):
         leader_mark = " Лидер" if is_leader and votes_count > 0 else ""
         lines.append(f"{index}. {participant}")
@@ -46,7 +43,6 @@ def format_results_message(registry: VoteRegistry, participants: tuple[str, ...]
         lines.append("")
     lines.append(f"Всего голосов: {total_votes}")
     lines.append(f"Лучший результат: {leader_votes}")
-    lines.append(ADMIN_RESULTS_TITLE)
     if unknown_votes > 0:
         lines.append("")
         lines.append(
